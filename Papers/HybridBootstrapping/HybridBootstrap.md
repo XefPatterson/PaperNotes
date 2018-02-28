@@ -19,4 +19,6 @@ Where ***x*** is the actual input/feature vector, ***e*** is a vector of the sam
 
 Visually, Figure 1 from the article compares Hybrid bootstrapping with regular dropout without re-scaling:
 
+![Figure 1](Figure1.png)
+
 
