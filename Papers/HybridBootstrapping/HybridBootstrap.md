@@ -38,3 +38,6 @@ For me, one of the most interesting points, besides the the proposed technique, 
 Figure 3 from the article is perhaps the most interesting one in my opinion and shows these claims about tuning *u* vs *p*:
 
 ![Figure 3](Figure3.png)
+
+### Conclusion
+This papers presents a novel alternative to dropout, which seems to give slightly better generalization results at the cost of a more complicated implementation, but struggles to show clear, fair comparisons. I read the first version of this paper on arxiv and feel that a new version with (1) better comparisons and (2) more implementation details - or details on the computational/memory cost compared to dropout - would be very interesting. They also present a way to sample the dropout probability at each iteration that helps hyper-parameter tuning that seems easy to implement.
