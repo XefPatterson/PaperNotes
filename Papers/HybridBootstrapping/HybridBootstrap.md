@@ -21,4 +21,8 @@ Visually, Figure 1 from the article compares Hybrid bootstrapping with regular d
 
 ![Figure 1](Figure1.png)
 
+For me, one of the most interesting points, besides the the proposed technique, is the trick proposed to be more robust to the dropout penality (I am not sure if this was proposed before, but I was unaware of this). Instead of specifying a value for the dropout probability *p*, the authors suggest to instead specify an upper bound *u* for a uniform distribution: Uniform(0,*u*) from which to sample *p* at each iteration. They empirically show that "*performance is much less sensitive to the choice of u than it is to the choice of p*".
 
+Figure 3 from the article is perhaps the most interesting one in my opinion and shows these claims about tuning *u* vs *p*:
+
+![Figure 3](Figure3.png)
