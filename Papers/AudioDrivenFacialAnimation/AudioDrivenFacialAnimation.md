@@ -46,7 +46,16 @@ which pushes down the average variation of the latent vector. However, a normali
 
 Here *E* and *B* are the dimensionality of *e* and the minibatch size respectively.
 
+#### Balancing the losses
+The authors also present an interesting way to balance these different losses, inspired by the Adam optimization techniques, that keeps a moving average of the second raw moment of the gradient w.r.t to each parameter in order to normalize the gradients. The authors propose to normalize each loss term individually, based also on the estimates of their second raw moments. From my understanding, this allows the loss landscape to behave similarly (at similar scales) w.r.t. each loss term, making it more intuitive to apply weights to loss terms. For example, for better performance on a certain aspect of the training criterion, one could multiply by an intuitive weight (e.g. 2) instead of grid- or random-seraching through many different unintuitive weights possibly on a log-scale. The moving average of the second raw moment for the *Position Term* is given by equation 5:
 
+![eq5](eq5.png)
+
+Where *Betha* is the decay parameter of the moving average. The initial value *v^(p)_0* is set to 0 and the estimate is corrected for startup-bias, as in Adam with *vhat = v/(1-Betha)*. The loss term is then normalized with :
+
+![eq6](eq6.png)
+
+The same technique is done for all 3 terms of the loss. This seems like a simple, generic way to balance loss terms and could accelerate hyper-parameter tuning in a number of cases.
 
 
 
