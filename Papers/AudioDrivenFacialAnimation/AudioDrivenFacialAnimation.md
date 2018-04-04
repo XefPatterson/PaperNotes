@@ -28,9 +28,31 @@ Each training input is augmented with a small (16 or 24 dimensional) latent vect
 #### Training losses
 The main element for this technique to work seem to be in the way the authors define their losses and their regularization terms. 
 
-The first loss, is the Position loss or *Position Term* as they call it which is the naïve loss that would come in mind to train such a network, where you want to minimize the distance between the outputs and the targets. Given *y* as the target vector for the *V* vertices of the mesh and *ŷ* as the output of the network, the *Position Term* is defined as the average squared difference for each vertex of the mesh:
+The first loss, is the Position loss or *Position Term* as they call it which is the naïve loss that would come in mind to train such a network, where you want to minimize the distance between the outputs and the targets. Given *y* as the target vector for the *V* vertices of the mesh and *ŷ* as the output of the network, the *Position Term* is defined as the average squared difference of each vertex of the mesh:
 
 ![eq1](eq1.png)
+
+As this can lead to unwanted jitter in the resulting animation since there is no temporal context in the ouput domain (the output for an audio-window does not depend on the previous or next one), an additional loss term, the *Motion Term* is added. The goal of this term is to push the network to model realistic motions between frames. This is done by sampling **pairs** of consecutive frames in each minibatch to retreive their instant motion - defined by the finite difference between the two. By defining the motion operator *m`[.]`* to retreive these finite differences, the *Motion Term* is defined as follows:
+
+![eq2](eq2.png)
+
+Finally, the most interesting loss comes as a regularization term to enable the learning of semantically plausible emotion vectors. The authors explain this regularization as a way to enforce short-term effects in the ouput-space to be influenced by sound and long-term effects by the emotional state. This makes intuitive senses as emotions generally vary slower than phonemes, while reducing ambiguity on the visual aspect of a face. Using the same finite difference operator as above, they first design this *Reglarization Term* for the emotion vector *e* as follows:
+
+![eq3](eq3.png)
+
+which pushes down the average variation of the latent vector. However, a normalization term is needed to ensure that this loss term does not simply pushes all emotion vectors to zero:
+
+![eq4](eq4.png)
+
+Here *E* and *B* are the dimensionality of *e* and the minibatch size respectively.
+
+
+
+
+
+
+
+
 
 
 
