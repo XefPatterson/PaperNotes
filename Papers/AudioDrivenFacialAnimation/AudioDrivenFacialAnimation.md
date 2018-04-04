@@ -58,6 +58,10 @@ Where *Betha* is the decay parameter of the moving average. The initial value *v
 The same technique is done for all 3 terms of the loss. This seems like a simple, generic way to balance loss terms and could accelerate hyper-parameter tuning in a number of cases.
 
 
+#### Retreiving generic emotional states
+Once training is done, the authors try to find emotion vectors that can be applied to new data, e.i. that can be used outside the neighbourhood of their associated input window. Their first step to do so is to find automatically vectors that do not reduce mouth movement, evaluating this on a validation dataset. As most emotion vectors reduce mouth movement this is needed as a first filtering pass. Candidates drawn from this process are then manually inspected on audio data from their associated source subject to assess their applicability. The final step is to test the remaining candidates with data from a different subject to assess their generalization properties. The remaining emotion vectors are the final ones used in the results demo, and are said to interpolate well. This shows that considerable manual mining of emotion vectors is needed to retreive acceptable vectors. It seems however, that this could potentially be mitigated with a larger dataset, with multiple speakers, tones, languages etc. In this paper, only 2 subjects, performing for a few minutes made up the entire dataset.
+
+
 
 
 
